@@ -39,6 +39,8 @@ async function fetchCreateMarcupLoadMore(e) {
     const hits = await apiService.searchImages();
 
     await markup(hits);
+
+    scroll();
   } catch (error) {
     console.warn(error);
   }
