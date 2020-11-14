@@ -3,7 +3,7 @@ import templatesCard from '../templates/createCard.hbs';
 import ApiService from './apiService';
 const containerCard = document.querySelector('.gallery');
 const btnEl = document.querySelector('[data-action=load]');
-const list = document.querySelector('.style.list');
+// const list = document.querySelector('.stylelist');
 
 const inputEl = document.querySelector('[name="query"]');
 
@@ -11,8 +11,11 @@ inputEl.addEventListener('input', debounce(onInputSearchImages, 500));
 btnEl.addEventListener('click', debounce(fetchCreateMarcupLoadMore, 300));
 
 const apiService = new ApiService();
+// lol();
 
 function onInputSearchImages(e) {
+  e.preventDefault();
+
   clearList();
   if (e.target.value.length === 0) {
     btnEl.disabled = true;
@@ -25,14 +28,20 @@ function onInputSearchImages(e) {
   apiService.resetPage();
   fetchCreateMarcupLoadMore();
 }
+// inputEl.addEventListener('keydown', function (e) {
+//   if (e.code === 'Enter') {
+//     e.preventDefault();
+//   }
+// });
 
 async function fetchCreateMarcupLoadMore(e) {
   try {
     const hits = await apiService.searchImages();
 
     await markup(hits);
-    scroll();
-  } catch (error) {}
+  } catch (error) {
+    console.warn(error);
+  }
 }
 
 function markup(data) {
@@ -50,6 +59,14 @@ function scroll() {
 
 function clearList() {
   containerCard.innerHTML = '';
+}
+
+function lol() {
+  const list = document.querySelectorAll('.list-style');
+
+  if (list.length < 1) {
+    btnEl.disabled = true;
+  }
 }
 
 // function onInputSearchImages(e) {
