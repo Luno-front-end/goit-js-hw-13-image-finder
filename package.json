@@ -57,6 +57,7 @@
     "webpack-merge": "^5.3.0"
   },
   "dependencies": {
+    "animated-scroll-to": "^2.0.12",
     "core-js": "^3.7.0"
   }
 }
